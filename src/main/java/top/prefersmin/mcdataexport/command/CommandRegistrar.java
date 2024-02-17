@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.Mod;
 import top.prefersmin.mcdataexport.DataGenerator;
 import top.prefersmin.mcdataexport.MinecraftDataExport;
 
-import static top.prefersmin.mcdataexport.ExportMethod.exportBiomes;
 import static top.prefersmin.mcdataexport.ExportMethod.exportEntityIDs;
 import static top.prefersmin.mcdataexport.ExportMethod.exportModItem;
 
@@ -45,7 +44,7 @@ public class CommandRegistrar {
 
         dispatcher.register(Commands.literal("exportBiomes").executes(context -> {
             Player player = context.getSource().getPlayerOrException();
-            exportBiomes(player);
+            dataGenerator.exportBiomes(player);
             return 1;
         }));
 

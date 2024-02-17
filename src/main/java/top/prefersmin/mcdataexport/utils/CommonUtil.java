@@ -1,11 +1,11 @@
 package top.prefersmin.mcdataexport.utils;
 
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static net.minecraftforge.registries.ForgeRegistries.ITEMS;
 
@@ -33,6 +33,12 @@ public class CommonUtil {
      */
     public static String formatEntityNameSpace(EntityType<?> entity) {
         return entity.getDescriptionId().replaceFirst("^(entity)\\.", "").replaceFirst("\\.", ":");
+    }
+
+    public static Item getRandomItem() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(mcItems.size());
+        return mcItems.get(randomIndex);
     }
 
 }

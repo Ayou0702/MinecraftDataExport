@@ -35,7 +35,7 @@ public class BiomesUtil {
      * @return 唯一标识
      */
     public static Optional<ResourceLocation> getKeyForBiome(Level level, Biome biome) {
-        return getBiomeRegistry(level).isPresent() ? Optional.of(getBiomeRegistry(level).get().getKey(biome)) : Optional.empty();
+        return getBiomeRegistry(level).isPresent() ? Optional.ofNullable(getBiomeRegistry(level).get().getKey(biome)) : Optional.empty();
     }
 
     /**
@@ -54,7 +54,7 @@ public class BiomesUtil {
      * @return 唯一标识
      */
     public static List<ResourceLocation> getAllowedBiomeKeys(Level level) {
-        final List<ResourceLocation> biomeKeys = new ArrayList<ResourceLocation>();
+        final List<ResourceLocation> biomeKeys = new ArrayList<>();
         if (getBiomeRegistry(level).isPresent()) {
             for (Map.Entry<ResourceKey<Biome>, Biome> entry : getBiomeRegistry(level).get().entrySet()) {
                 Biome biome = entry.getValue();
@@ -75,7 +75,7 @@ public class BiomesUtil {
      * @return 唯一标识
      */
     public static List<ResourceLocation> getGeneratingDimensionKeys(ServerLevel serverLevel, Biome biome) {
-        final List<ResourceLocation> dimensions = new ArrayList<ResourceLocation>();
+        final List<ResourceLocation> dimensions = new ArrayList<>();
         final Registry<Biome> biomeRegistry = getBiomeRegistry(serverLevel).get();
         for (ServerLevel level : serverLevel.getServer().getAllLevels()) {
             Set<Holder<Biome>> biomeSet = level.getChunkSource().getGenerator().getBiomeSource().possibleBiomes();

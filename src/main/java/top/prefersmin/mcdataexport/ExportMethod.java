@@ -1,21 +1,14 @@
 package top.prefersmin.mcdataexport;
 
-import com.google.common.collect.ListMultimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
-import dev.ftb.mods.ftblibrary.snbt.SNBT;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static net.minecraftforge.registries.ForgeRegistries.ITEMS;
-import static top.prefersmin.mcdataexport.utils.BiomesUtil.getGeneratingDimensionsForAllowedBiomes;
+import static top.prefersmin.mcdataexport.utils.CommonUtil.formatItemNameSpace;
 
 public class ExportMethod {
 
@@ -32,15 +25,6 @@ public class ExportMethod {
 
     static {
         mcItems.addAll(ITEMS.getValues());
-    }
-
-    public static void exportBiomes(Player player) {
-
-        ListMultimap<ResourceLocation, ResourceLocation> map = getGeneratingDimensionsForAllowedBiomes((ServerLevel) player.level());
-
-        map.forEach((biomeKey, level) -> {
-
-        });
     }
 
     public static void exportEntityIDs() {
@@ -126,7 +110,7 @@ public class ExportMethod {
                 questData.add("id: \"51B4F8ECAEC1C2A7\"");
                 questData.add("item: {");
                 questData.add("Count: 1b");
-                questData.add("id: \"" + item + "\"");
+                questData.add("id: \"" + formatItemNameSpace(item) + "\"");
                 questData.add("tag: {");
                 questData.add("Damage: 0");
                 questData.add("}");
